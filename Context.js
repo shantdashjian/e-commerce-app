@@ -13,9 +13,11 @@ function ContextProvider(props) {
 		}))
 	}
 
-	function addToCart(img) {
+	function toggleAddToCart(img) {
 		if (!cartItems.includes(img)) {
 			setCartItems(prev => [...prev, img])
+		} else {
+			setCartItems(prev => prev.filter(item => item !== img))
 		}
 	}
 
@@ -26,7 +28,7 @@ function ContextProvider(props) {
 	}, [])
 
 	return (
-		<Context.Provider value={{allPhotos, toggleFavorite, addToCart}}>
+		<Context.Provider value={{allPhotos, cartItems, toggleFavorite, toggleAddToCart}}>
 			{props.children}
 		</Context.Provider>
 	)

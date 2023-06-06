@@ -4,7 +4,7 @@ import {Context} from "../Context";
 
 function Image({className, img}) {
 	const [hovered, setHovered] = React.useState(false)
-	const {toggleFavorite, addToCart} = React.useContext(Context)
+	const {cartItems, toggleFavorite, toggleAddToCart} = React.useContext(Context)
 
 	function toggleHovered() {
 		setHovered(prev => !prev)
@@ -13,15 +13,24 @@ function Image({className, img}) {
 	const favoredIcon = img.isFavorite ? (
 		<i className="ri-heart-fill favorite" onClick={() => toggleFavorite(img.id)}></i>
 	) : null
+
+	const addedToCartIcon = cartItems.includes(img) ? (
+		<i className="ri-shopping-cart-fill cart" onClick={() => toggleAddToCart(img)}></i>
+	) : null
+
 	const icons = hovered ? (
 		<React.Fragment>
-			<i className="ri-heart-line favorite" onClick={() => toggleFavorite(img.id)}></i>
-			<i className="ri-add-circle-line cart" onClick={() => addToCart(img)}></i>
+			{favoredIcon || <i className="ri-heart-line favorite" onClick={() => toggleFavorite(img.id)}></i>}
+			{addedToCartIcon || <i className="ri-add-circle-line cart" onClick={() => toggleAddToCart(img)}></i>}
 		</React.Fragment>
-	) : null
+	) : (
+		<React.Fragment>
+			{favoredIcon}
+			{addedToCartIcon}
+		</React.Fragment>
+	)
 	return (
 		<div className={`${className} image-container`} onMouseEnter={toggleHovered} onMouseLeave={toggleHovered}>
-			{favoredIcon}
 			{icons}
 			<img src={img.url} className="image-grid"/>
 		</div>
