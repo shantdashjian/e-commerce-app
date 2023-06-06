@@ -1,20 +1,22 @@
 import React from "react"
 import PropTypes from "prop-types"
+import {Context} from "../Context";
 
-function Image({className, img, toggleFavorite}) {
+function Image({className, img}) {
 	const [hovered, setHovered] = React.useState(false)
+	const {toggleFavorite, addToCart} = React.useContext(Context)
 
 	function toggleHovered() {
 		setHovered(prev => !prev)
 	}
 
 	const favoredIcon = img.isFavorite ? (
-		<i className="ri-heart-fill favorite" onClick={toggleFavorite}></i>
+		<i className="ri-heart-fill favorite" onClick={() => toggleFavorite(img.id)}></i>
 	) : null
 	const icons = hovered ? (
 		<React.Fragment>
-			<i className="ri-heart-line favorite" onClick={toggleFavorite}></i>
-			<i className="ri-add-circle-line cart"></i>
+			<i className="ri-heart-line favorite" onClick={() => toggleFavorite(img.id)}></i>
+			<i className="ri-add-circle-line cart" onClick={() => addToCart(img)}></i>
 		</React.Fragment>
 	) : null
 	return (

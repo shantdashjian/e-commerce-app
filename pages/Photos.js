@@ -4,18 +4,15 @@ import Image from "../components/Image";
 import {getClass} from "../utils";
 
 function Photos() {
-	const {allPhotos, setAllPhotos} = useContext(Context)
-
-	function toggleFavorite(id) {
-		setAllPhotos(prevPhotos => prevPhotos.map(photo => {
-			photo.isFavorite = photo.id === id ? !photo.isFavorite : photo.isFavorite
-			return photo
-		}))
-	}
+	const {allPhotos} = useContext(Context)
 
 	const images = allPhotos
 		.map((photo, index) =>
-			<Image key={photo.id} img={photo} className={getClass(index)} toggleFavorite={() => toggleFavorite(photo.id)}/>
+			<Image
+				key={photo.id}
+				img={photo}
+				className={getClass(index)}
+			/>
 		)
 
 	return (
