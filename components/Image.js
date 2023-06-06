@@ -7,6 +7,9 @@ function Image({className, img, toggleFavorite}) {
 		setHovered(prev => !prev)
 	}
 
+	const favoredIcon = img.isFavorite ? (
+		<i className="ri-heart-fill favorite" onClick={toggleFavorite}></i>
+	) : null
 	const icons = hovered ? (
 		<React.Fragment>
 			<i className="ri-heart-line favorite" onClick={toggleFavorite}></i>
@@ -15,6 +18,7 @@ function Image({className, img, toggleFavorite}) {
 	) : null
 	return (
 		<div className={`${className} image-container`} onMouseEnter={toggleHovered} onMouseLeave={toggleHovered}>
+			{favoredIcon}
 			{icons}
 			<img src={img.url} className="image-grid"/>
 		</div>
