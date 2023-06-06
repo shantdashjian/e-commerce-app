@@ -1,6 +1,6 @@
 import React from "react"
 
-function Image({className, img}) {
+function Image({className, img, toggleFavorite}) {
 	const [hovered, setHovered] = React.useState(false)
 
 	function toggleHovered() {
@@ -9,7 +9,7 @@ function Image({className, img}) {
 
 	const icons = hovered ? (
 		<React.Fragment>
-			<i className="ri-heart-line favorite"></i>
+			<i className="ri-heart-line favorite" onClick={toggleFavorite}></i>
 			<i className="ri-add-circle-line cart"></i>
 		</React.Fragment>
 	) : null
