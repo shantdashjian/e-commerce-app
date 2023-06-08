@@ -24,7 +24,10 @@ function ContextProvider(props) {
 	React.useEffect(() => {
 		fetch("https://raw.githubusercontent.com/bobziroll/scrimba-react-bootcamp-images/master/images.json")
 			.then(res => res.json())
-			.then(data => setAllPhotos(data))
+			.then(data => {
+				data.forEach(item => item.cost = 5.99)
+				setAllPhotos(data)
+			})
 	}, [])
 
 	return (
