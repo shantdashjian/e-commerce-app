@@ -28,9 +28,9 @@ function Cart() {
 			<h1>Check out</h1>
 			{cartItemElements}
 			<p className="total-cost">{`Total: ${toDollar(total)}`}</p>
-			<div className="order-button">
+			{cartItems.length > 0 && <div className="order-button">
 				<button onClick={placeOrder}>{orderingText}</button>
-			</div>
+			</div>}
 		</main>
 	)
 }
