@@ -1,11 +1,15 @@
 import React from "react"
 
+import {Context} from "../Context"
+
 function CartItem({item}) {
+	const {toggleAddToCart} = React.useContext(Context)
+
 	return (
 		<div className="cart-item">
-			<i className="ri-delete-bin-line"></i>
+			<i className="ri-delete-bin-line" onClick={() => toggleAddToCart(item)}></i>
 			<img src={item.url} width="130px" />
-			<p>$5.99</p>
+			<p>{item.price}</p>
 		</div>
 	)
 }
